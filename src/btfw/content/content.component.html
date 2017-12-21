@@ -1,0 +1,6 @@
+<btfw-menu *ngIf="menuService.isVertical && screenService.isLarge() || menuService.showingLeftSideMenu && !screenService.isLarge()" 
+    class="vertical-menu"></btfw-menu>
+
+<div class="body-style">
+  <router-outlet></router-outlet>
+</div>

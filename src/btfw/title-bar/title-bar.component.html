@@ -1,0 +1,21 @@
+<div *screenBelowLarge class="small-title-bar">
+  <span class="glyphicon glyphicon-menu-hamburger icon-format"
+      (click)="menuService.toggleLeftSideMenu()">
+
+  </span>
+  <div class="small-app-name-holder">
+    <div class="small-app-name">{{ frameworkConfigService.applicationTitle }}</div>
+  </div>
+  <span class="glyphicon glyphicon-option-vertical icon-format">
+      
+  </span>>
+</div>
+
+<div *screenLarge class="title-bar">
+  <div class="app-name">{{ frameworkConfigService.applicationTitle }}</div>
+  <div class="menu-area">
+    <btfw-top-bar></btfw-top-bar>
+    <btfw-menu *ngIf="!menuService.isVertical">
+    </btfw-menu>
+  </div>
+</div>

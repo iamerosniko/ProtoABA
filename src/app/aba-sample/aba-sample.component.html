@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="col-md-8">
+      <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h4>
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Firm Demographics</a>
+                  </h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                      <form [formGroup]="tableFormGroup">
+                          
+                        <table class="table table-inverse table-bordered table-hover table-striped input-sm">
+                            <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th *ngFor="let title of firmDemographics"> {{title}}</th>
+                                </tr>
+                            </thead>
+                            <tbody formArrayName="regions">
+                                
+                                <tr *ngFor="let address of tableFormGroup.controls.regions.controls; let i=index">
+                                    <th [formGroupName]="i">
+                                        <!-- <input type="text" formControlName="validate" readonly>  -->
+                                        {{sample(i)}}
+                                        <!-- {{i}} -->
+                                    <th>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
