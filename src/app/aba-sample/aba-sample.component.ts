@@ -43,11 +43,11 @@ export class AbaSampleComponent implements OnInit {
 
     return this.fb.group({
       region:[name],
-      'Equity Partners':[null,Validators.required],
-      'Non-Equity Partners': [null, Validators.required],
-      'Associates': [null, Validators.required],
-      'Counsel': [null, Validators.required],
-      'Other Lawyers': [null, Validators.required]
+      'Equity Partners':[0,Validators.compose[Validators.required, Validators.pattern['']] ],
+      'Non-Equity Partners': [0,Validators.compose[Validators.required, Validators.pattern['']] ],
+      'Associates': [0, Validators.compose[Validators.required, Validators.pattern['']] ],
+      'Counsel': [0, Validators.compose[Validators.required, Validators.pattern['']] ],
+      'Other Lawyers': [0, Validators.compose[Validators.required, Validators.pattern['']] ],
     });
   }
 
@@ -60,8 +60,19 @@ export class AbaSampleComponent implements OnInit {
     //return control[index].controls['validate'].value
   }
 
-  compute(){
-
+  compute(index : number){
+    const control = <FormArray>this.myForm.controls['regions'];
+    const formb=<FormGroup>control.at(index)
+    var value:number=0;
+   
+      this.firmDemographics.forEach(element => {
+        if(element!='Totals'){
+          var a =+formb.controls[element].value
+       
+          value=value + (a)
+        }
+      });
+    return value;
   }
 
   submit(){
@@ -76,4 +87,6 @@ export class AbaSampleComponent implements OnInit {
       });
     }
   }
+
+
 }

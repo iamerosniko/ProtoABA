@@ -27,12 +27,12 @@
                                         {{sample(i)}}
                                         <!-- {{i}} -->
                                     </th>
-                                    <td><input type='text' formControlName="Equity Partners"></td>
-                                    <td><input type='text' formControlName="Non-Equity Partners"></td>
-                                    <td><input type='text' formControlName="Associates"></td>
-                                    <td><input type='text' formControlName="Counsel"></td>
-                                    <td><input type='text' formControlName="Other Lawyers"></td>
-                                    <td>&nbsp;</td>
+                                    <td><input type='text' class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="Equity Partners"></td>
+                                    <td><input type='text' onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="Non-Equity Partners"></td>
+                                    <td><input type='text' onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="Associates"></td>
+                                    <td><input type='text' onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="Counsel"></td>
+                                    <td><input type='text' onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="Other Lawyers"></td>
+                                    <td>{{compute(i)}}</td>
                                 </tr>
                             </tbody>
                         </table>
