@@ -19,45 +19,61 @@ export class AbaSampleComponent implements OnInit {
     })
   }
 
+  ngOnInit() {
+    this.addRow();
+  }
+  
+
+  addRow(){
+   
+    const control = <FormArray>this.myForm.controls['regions'];
 
 
-
-    this.tableFormGroup=this.fb.group({
-      regions :[ this.fb.array([
-        
-      ]),Validators.required]
+    
+    this.items.forEach(element => {
+      control.push(this.initItems(element));
+    
     });
 
-
-
-    this.addRegions();
+   
   }
 
-  addRegions(){
-    const control = <FormArray>this.tableFormGroup.controls['regions'];
-    console.log(control)
-    this.items.forEach(element => {
-      control.push(this.fb.group({
-        'name' : [null, Validators.required],
-        'description' : [null, Validators.compose([Validators.required, Validators.minLength(30), Validators.maxLength(500)])],
-        'validate' : element
-      }))
-    })
+  initItems(name:string): FormGroup{
+    // Here, we make the form for each day
 
-    // this.regionArray=this.regionArray.concat(this.fb.group({
-    //   'name' : [null, Validators.required],
-    //   'description' : [null, Validators.compose([Validators.required, Validators.minLength(30), Validators.maxLength(500)])],
-    //   'validate' : element
-    // }));
+    return this.fb.group({
+      region:[name],
+      'Equity Partners':[null,Validators.required],
+      'Non-Equity Partners': [null, Validators.required],
+      'Associates': [null, Validators.required],
+      'Counsel': [null, Validators.required],
+      'Other Lawyers': [null, Validators.required]
+    });
   }
-
 
   sample(index:number){
-    const control = <FormArray>this.tableFormGroup.controls['regions'];
+    const control = <FormArray>this.myForm.controls['regions'];
     const formb=<FormGroup>control.at(index)
-    return (formb.controls['validate'].value)
+    return (formb.controls['region'].value)
     // console.log(formbuild)
     // return formbuild.control['validate'].value
     //return control[index].controls['validate'].value
+  }
+
+  compute(){
+
+  }
+
+  submit(){
+    //console.log(this.myForm.value)
+    const control = <FormArray>this.myForm.controls['regions'];
+    for(var i =0;i<control.length;i++){
+      const demographics =<FormGroup> control.at(i);
+
+      this.firmDemographics.forEach(element => {
+        if(element!='Totals')
+        console.log(element +' ' +demographics.controls[element].value)
+      });
+    }
   }
 }
