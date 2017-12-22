@@ -8,22 +8,17 @@ import { FormBuilder, FormGroup, Validators,FormArray } from '@angular/forms';
 })
 export class AbaSampleComponent implements OnInit {
 
-  groups:any[]=[];
-
-  tableFormGroup:FormGroup;
-  constructor(private fb:FormBuilder) {
-
-    this.initializeFormGroup();
-  }
 
   firmDemographics:string[]=['Equity Partners','Non-Equity Partners','Associates','Counsel','Other Lawyers','Totals']
   items:string[]=['American Indian/Alaska Native','African American','Asian','Hispanic/Latino','Multiracial','White','Women']
+  myForm: FormGroup;
 
-  ngOnInit() {
+  constructor(private fb:FormBuilder) {
+    this.myForm = this.fb.group({
+      regions: this.fb.array([])
+    })
   }
-  regionArray:FormGroup[]=[];
 
-  initializeFormGroup(){
 
 
 
