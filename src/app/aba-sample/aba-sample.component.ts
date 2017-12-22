@@ -21,6 +21,18 @@ export class AbaSampleComponent implements OnInit {
 
   ngOnInit() {
     this.addRow();
+    this.myForm.valueChanges.subscribe(()=>{
+      const control = <FormArray>this.myForm.controls['regions'];
+      for(var i =0;i<control.length;i++){
+        const demographics =<FormGroup> control.at(i);
+        this.firmDemographics.forEach(element => {
+          if(element!='Totals')
+          if(demographics.controls[element].invalid){
+            demographics.controls[element].setValue(0)
+          }
+        });
+      }
+    })
   }
   
 
@@ -43,11 +55,11 @@ export class AbaSampleComponent implements OnInit {
 
     return this.fb.group({
       region:[name],
-      'Equity Partners':[0,Validators.compose[Validators.required, Validators.pattern['']] ],
-      'Non-Equity Partners': [0,Validators.compose[Validators.required, Validators.pattern['']] ],
-      'Associates': [0, Validators.compose[Validators.required, Validators.pattern['']] ],
-      'Counsel': [0, Validators.compose[Validators.required, Validators.pattern['']] ],
-      'Other Lawyers': [0, Validators.compose[Validators.required, Validators.pattern['']] ],
+      'Equity Partners':[0,Validators.required],
+      'Non-Equity Partners': [0,Validators.required ],
+      'Associates': [0, Validators.required ],
+      'Counsel': [0,Validators.required ],
+      'Other Lawyers': [0,Validators.required],
     });
   }
 
@@ -87,6 +99,5 @@ export class AbaSampleComponent implements OnInit {
       });
     }
   }
-
 
 }
