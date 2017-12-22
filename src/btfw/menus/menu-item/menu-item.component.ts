@@ -70,7 +70,10 @@ export class MenuItemComponent implements OnInit {
 
   @HostListener('click', ['$event'])
   onClick() : void {
-    event.stopPropagation();
+    try{
+
+    
+    // event.stopPropagation();
 
     if (this.item.submenu) {
       if (this.menuService.isVertical) {
@@ -78,12 +81,16 @@ export class MenuItemComponent implements OnInit {
       }
     }
     else if (this.item.route) {
-      let newEvent = new MouseEvent('mouseleave', {bubbles: true});
-      this.renderer.invokeElementMethod(
-        this.el.nativeElement, 'dispatchEvent', [newEvent]
-      );
+      // let newEvent = new MouseEvent('mouseleave', {bubbles: true});
+      // this.renderer.invokeElementMethod(
+      //   this.el.nativeElement, 'dispatchEvent', [newEvent]
+      // );
 
       this.router.navigate(['/' + this.item.route]);
+    }
+    }
+    catch(ex){
+      console.log(ex)
     }
   }
 
